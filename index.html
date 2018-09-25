@@ -1,0 +1,60 @@
+<html>
+
+  <head>
+    <link rel="stylesheet" href="main.css">
+    <title>jquerypractice</title>
+    <script
+      src="http://code.jquery.com/jquery-3.2.1.min.js">
+    </script>
+    <script>
+      $(document).ready(function()
+      {
+        $( "#cityField" ).keyup(function()
+        {
+          var url = "http://bioresearch.byu.edu/cs260/jquery/getcity.cgi?q="+$("#cityField").val();
+          $.getJSON(url,function(data)
+          {
+            var everything;
+            everything = "<ul>";
+            $.each(data, function(i,item)
+            {
+              everything += "<li> "+data[i].city;
+            });
+            everything += "</ul>";
+            $("#txtHint").html(everything);
+          })
+          .done(function() { console.log('getJSON request succeeded!'); })
+          .fail(function(jqXHR, textStatus, errorThrown)
+          {
+            console.log('getJSON request failed! ' + textStatus);
+            console.log("incoming "+jqXHR.responseText);
+          })
+          .always(function() { console.log('getJSON request ended!');
+          });
+          });
+        });
+    </script>
+    <script src="prct.js"></script>
+  </head>
+
+  <body class="Content">
+    <h1>Lab2</h1>
+    <h3>Jacob Morrison</h3>
+    <h3>CS260 Section:000</h3>
+
+    <div class="div1">
+      <form>
+        Enter a City in Utah:<input type="text" id="cityField" value=""/><br/>
+        Suggestion: <span id="txtHint">Empty</span>
+        <input id="weatherButton" type="submit" value="Submit"/>
+      </form>
+      <p>City</p>
+      <textarea id="displayCity">No City</textarea>
+      <p>Current Weather</p>
+      <div id="weather">No weather</div>
+    </div>
+
+
+  </body>
+
+</html>
