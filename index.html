@@ -32,7 +32,15 @@
           .always(function() { console.log('getJSON request ended!');
           });
           });
+          $("#weatherButton").click(function(e)
+          {
+            var value = $("#cityField").val();
+            console.log(value);
+            e.preventDefault();
+            $("#displayCity").text(value);
+          });
         });
+
     </script>
     <script src="prct.js"></script>
   </head>
